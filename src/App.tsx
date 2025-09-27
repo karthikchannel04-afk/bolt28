@@ -32,12 +32,10 @@ import AdminTherapyManagement from './pages/AdminTherapyManagement';
 // Therapy Module Components
 import MindfulnessModule from './pages/modules/MindfulnessModule';
 import GratitudeModule from './pages/modules/GratitudeModule';
-import AddictionSupportModule from './pages/modules/AddictionSupportModule';
 import RelaxationMusicModule from './pages/modules/RelaxationMusicModule';
 import TetrisTherapyModule from './pages/modules/TetrisTherapyModule';
 import ArtTherapyModule from './pages/modules/ArtTherapyModule';
 import CBTModule from './pages/modules/CBTModule';
-import SleepTherapyModule from './pages/modules/SleepTherapyModule';
 import StressManagementModule from './pages/modules/StressManagementModule';
 import ExposureTherapyModule from './pages/modules/ExposureTherapyModule';
 import VideoTherapyModule from './pages/modules/VideoTherapyModule';
@@ -99,9 +97,6 @@ function App() {
           <Route path="/therapy-modules/gratitude" element={
             user?.role === 'patient' ? <GratitudeModule /> : <Navigate to="/dashboard" />
           } />
-          <Route path="/therapy-modules/addiction" element={
-            user?.role === 'patient' ? <AddictionSupportModule /> : <Navigate to="/dashboard" />
-          } />
           <Route path="/therapy-modules/music" element={
             user?.role === 'patient' ? <RelaxationMusicModule /> : <Navigate to="/dashboard" />
           } />
@@ -110,9 +105,6 @@ function App() {
           } />
           <Route path="/therapy-modules/cbt" element={
             user?.role === 'patient' ? <CBTModule /> : <Navigate to="/dashboard" />
-          } />
-          <Route path="/therapy-modules/sleep" element={
-            user?.role === 'patient' ? <SleepTherapyModule /> : <Navigate to="/dashboard" />
           } />
           <Route path="/therapy-modules/stress" element={
             user?.role === 'patient' ? <StressManagementModule /> : <Navigate to="/dashboard" />

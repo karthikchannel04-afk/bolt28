@@ -46,8 +46,8 @@ function LandingPage() {
   ];
 
   const therapyModules = [
-    'CBT Journaling', 'Guided Meditation', 'Sleep Therapy', 'Stress Management',
-    'Mindfulness Exercises', 'Gratitude Journal', 'Addiction Support', 'Relaxation Music',
+    'CBT Journaling', 'Guided Meditation', 'Stress Management', 'Mindfulness Exercises', 
+    'Gratitude Journal', 'Relaxation Music',
     'Tetris Therapy', 'Art & Color Therapy', 'Exposure Therapy', 'Acceptance & Commitment Therapy'
   ];
 

@@ -69,8 +69,6 @@ const ChatbotPage = () => {
     { id: 'anxiety', name: 'Anxiety', icon: Brain, color: 'from-blue-500 to-cyan-500', description: 'Worry, fear, and nervousness' },
     { id: 'depression', name: 'Depression', icon: Heart, color: 'from-purple-500 to-pink-500', description: 'Sadness, hopelessness, low mood' },
     { id: 'stress', name: 'Stress', icon: Target, color: 'from-orange-500 to-red-500', description: 'Overwhelm and pressure' },
-    { id: 'sleep', name: 'Sleep Problems', icon: Moon, color: 'from-indigo-500 to-purple-500', description: 'Insomnia and sleep quality issues' },
-    { id: 'addiction', name: 'Addiction', icon: Shield, color: 'from-red-500 to-pink-500', description: 'Substance or behavioral dependencies' },
     { id: 'motivation', name: 'Low Motivation', icon: TrendingDown, color: 'from-gray-500 to-gray-600', description: 'Lack of drive and energy' },
     { id: 'relationships', name: 'Relationship Issues', icon: Users, color: 'from-green-500 to-teal-500', description: 'Interpersonal difficulties' }
   ];
@@ -112,30 +110,6 @@ const ChatbotPage = () => {
       { id: '9', text: 'Do you use unhealthy coping mechanisms? Please describe them.', type: 'text', required: true },
       { id: '10', text: 'Describe your most stressful situation recently:', type: 'text', required: false }
     ],
-    sleep: [
-      { id: '1', text: 'How many hours of sleep do you typically get? Please provide details.', type: 'text', required: true },
-      { id: '2', text: 'How long does it take you to fall asleep? Please describe your experience.', type: 'text', required: true },
-      { id: '3', text: 'How often do you wake up during the night? Please explain.', type: 'text', required: true },
-      { id: '4', text: 'How refreshed do you feel when you wake up? Please describe.', type: 'text', required: true },
-      { id: '5', text: 'Do you have a consistent bedtime routine? Please describe it.', type: 'text', required: true },
-      { id: '6', text: 'What factors affect your sleep? Please list them.', type: 'text', required: true },
-      { id: '7', text: 'Do you use electronic devices before bed? Please describe your habits.', type: 'text', required: true },
-      { id: '8', text: 'How comfortable is your sleep environment? Please describe it.', type: 'text', required: true },
-      { id: '9', text: 'Do you take naps during the day? Please describe your napping habits.', type: 'text', required: true },
-      { id: '10', text: 'What sleep aids have you tried? Please list them.', type: 'text', required: false }
-    ],
-    addiction: [
-      { id: '1', text: 'What type of addiction are you struggling with? Please describe.', type: 'text', required: true },
-      { id: '2', text: 'How often do you engage in this behavior? Please provide details.', type: 'text', required: true },
-      { id: '3', text: 'How strong are your cravings typically? Please describe them.', type: 'text', required: true },
-      { id: '4', text: 'Have you tried to quit or reduce this behavior before? Please explain your attempts.', type: 'text', required: true },
-      { id: '5', text: 'What triggers your addictive behavior? Please describe your triggers.', type: 'text', required: true },
-      { id: '6', text: 'How does this addiction affect your daily life? Please explain the impact.', type: 'text', required: true },
-      { id: '7', text: 'Do you have a support system? Please describe who supports you.', type: 'text', required: true },
-      { id: '8', text: 'How motivated are you to change this behavior? Please explain your motivation level.', type: 'text', required: true },
-      { id: '9', text: 'Have you experienced withdrawal symptoms? Please describe them.', type: 'text', required: true },
-      { id: '10', text: 'What would success look like for you?', type: 'text', required: false }
-    ],
     motivation: [
       { id: '1', text: 'How motivated do you feel on a typical day? Please describe your motivation levels.', type: 'text', required: true },
       { id: '2', text: 'In which areas do you lack motivation? Please list them.', type: 'text', required: true },
@@ -167,10 +141,8 @@ const ChatbotPage = () => {
   const therapyModules = {
     'cbt': { title: 'CBT Thought Records', icon: Brain, color: 'from-purple-500 to-pink-500' },
     'mindfulness': { title: 'Mindfulness & Breathing', icon: Brain, color: 'from-blue-500 to-cyan-500' },
-    'sleep': { title: 'Sleep Therapy', icon: Moon, color: 'from-indigo-500 to-purple-500' },
     'stress': { title: 'Stress Management', icon: Target, color: 'from-orange-500 to-red-500' },
     'gratitude': { title: 'Gratitude Journal', icon: Heart, color: 'from-green-500 to-teal-500' },
-    'addiction': { title: 'Addiction Support', icon: Shield, color: 'from-red-500 to-pink-500' },
     'music': { title: 'Relaxation Music', icon: Heart, color: 'from-purple-500 to-blue-500' },
     'tetris': { title: 'Tetris Therapy', icon: Target, color: 'from-cyan-500 to-blue-500' },
     'art': { title: 'Art & Color Therapy', icon: Heart, color: 'from-pink-500 to-purple-500' },
@@ -300,8 +272,8 @@ const ChatbotPage = () => {
       anxiety: ['cbt', 'mindfulness', 'exposure', 'music'],
       depression: ['cbt', 'gratitude', 'video', 'act'],
       stress: ['stress', 'mindfulness', 'music', 'art'],
-      'sleep problems': ['sleep', 'mindfulness', 'music', 'video'],
-      addiction: ['addiction', 'cbt', 'mindfulness', 'video'],
+      'sleep problems': ['mindfulness', 'music', 'video', 'stress'],
+      addiction: ['cbt', 'mindfulness', 'video', 'stress'],
       'low motivation': ['gratitude', 'cbt', 'video', 'act'],
       'relationship issues': ['video', 'cbt', 'act', 'art']
     };

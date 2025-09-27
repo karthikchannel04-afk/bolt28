@@ -45,8 +45,8 @@ function ProgressPage() {
       progress: 0
     },
     { 
-      title: 'Sleep Champion', 
-      description: 'Maintained 8+ hours sleep for 5 days', 
+      title: 'Stress Warrior', 
+      description: 'Successfully managed stress for 5 days', 
       earned: false, 
       progress: 0
     },
@@ -108,7 +108,6 @@ function ProgressPage() {
       const processedMoodData = filteredEntries.map((entry: any) => ({
         date: entry.date,
         mood: (entry.moodIntensity || 3) / 2, // Convert 1-10 scale to 1-5
-        sleep: entry.sleepHours || 7,
         anxiety: 10 - (entry.stressLevel === 'Low' ? 8 : entry.stressLevel === 'Medium' ? 5 : 2),
         energy: entry.energyLevel === 'High' ? 8 : entry.energyLevel === 'Medium' ? 5 : 2
       }));
@@ -119,10 +118,8 @@ function ProgressPage() {
       const latestEntry = userMoodEntries[userMoodEntries.length - 1];
       setCurrentMood((latestEntry?.moodIntensity || 6) / 2); // Convert to 1-5 scale
 
-      // Calculate average sleep quality
-      const avgSleep = userMoodEntries.reduce((sum: number, entry: any) => 
-        sum + (entry.sleepHours || 7), 0) / userMoodEntries.length;
-      setAverageSleepQuality(avgSleep);
+      // Set default sleep quality since sleep tracking is removed
+      setAverageSleepQuality(7.5);
 
       // Calculate mood distribution
       const moodCounts = { excellent: 0, good: 0, neutral: 0, sad: 0, verySad: 0 };
@@ -146,7 +143,7 @@ function ProgressPage() {
     } else {
       // Default data if no entries
       setMoodData([
-        { date: new Date().toISOString().split('T')[0], mood: 3, sleep: 7, anxiety: 4, energy: 6 }
+        { date: new Date().toISOString().split('T')[0], mood: 3, anxiety: 4, energy: 6 }
       ]);
       setCurrentMood(3);
       setMoodDistribution([
@@ -199,10 +196,8 @@ function ProgressPage() {
     // Load actual therapy completion data
     const cbtRecords = JSON.parse(localStorage.getItem('mindcare_cbt_records') || '[]');
     const gratitudeEntries = JSON.parse(localStorage.getItem('mindcare_gratitude_entries') || '[]');
-    const sleepLogs = JSON.parse(localStorage.getItem('mindcare_sleep_logs') || '[]');
     const moodEntries = JSON.parse(localStorage.getItem('mindcare_mood_entries') || '[]');
     const exposureSessions = JSON.parse(localStorage.getItem('mindcare_exposure_sessions') || '[]');
-    const cravingLogs = JSON.parse(localStorage.getItem('mindcare_craving_logs') || '[]');
     const stressLogs = JSON.parse(localStorage.getItem('mindcare_stress_logs') || '[]');
     const videoProgress = JSON.parse(localStorage.getItem('mindcare_video_progress') || '[]');
     const actValues = JSON.parse(localStorage.getItem('mindcare_act_values') || '[]');
@@ -210,17 +205,14 @@ function ProgressPage() {
     // Filter data for current user
     const userCBT = cbtRecords.filter((r: any) => r.userId === user?.id || !r.userId);
     const userGratitude = gratitudeEntries.filter((e: any) => e.userId === user?.id || !e.userId);
-    const userSleep = sleepLogs.filter((l: any) => l.userId === user?.id || !l.userId);
     const userMood = moodEntries.filter((e: any) => e.userId === user?.id || !e.userId);
     const userExposure = exposureSessions.filter((s: any) => s.userId === user?.id || !s.userId);
-    const userCraving = cravingLogs.filter((l: any) => l.userId === user?.id || !l.userId);
     const userStress = stressLogs.filter((l: any) => l.userId === user?.id || !l.userId);
     const userVideo = videoProgress.filter((p: any) => p.userId === user?.id || !p.userId);
     const userACT = actValues.filter((v: any) => v.userId === user?.id || !v.userId);
 
     // Calculate total therapy sessions from all activities
-    const totalActivities = userCBT.length + userGratitude.length + userSleep.length + 
-                           userExposure.length + userCraving.length + userStress.length + 
+    const totalActivities = userCBT.length + userGratitude.length + userExposure.length + userStress.length + 
                            userVideo.length + userACT.length;
     setTotalTherapySessions(totalActivities);
 
@@ -241,13 +233,6 @@ function ProgressPage() {
         description: 'Mindfulness and breathing exercises'
       },
       { 
-        id: 'sleep', 
-        name: 'Sleep Therapy', 
-        total: 14,
-        completed: userSleep.length,
-        description: 'Sleep quality improvement techniques'
-      },
-      { 
         id: 'stress', 
         name: 'Stress Management', 
         total: 12,
@@ -260,13 +245,6 @@ function ProgressPage() {
         total: 30,
         completed: userGratitude.length,
         description: 'Daily gratitude practice'
-      },
-      { 
-        id: 'addiction', 
-        name: 'Addiction Support', 
-        total: 16,
-        completed: userCraving.length,
-        description: 'Addiction recovery support tools'
       },
       { 
         id: 'music', 
@@ -331,7 +309,6 @@ function ProgressPage() {
     const moodEntries = JSON.parse(localStorage.getItem('mindcare_mood_entries') || '[]');
     const cbtRecords = JSON.parse(localStorage.getItem('mindcare_cbt_records') || '[]');
     const gratitudeEntries = JSON.parse(localStorage.getItem('mindcare_gratitude_entries') || '[]');
-    const sleepLogs = JSON.parse(localStorage.getItem('mindcare_sleep_logs') || '[]');
 
     // Filter for current user and past week
     const userMoodEntries = moodEntries.filter((e: any) => 
@@ -343,9 +320,6 @@ function ProgressPage() {
     const userGratitude = gratitudeEntries.filter((e: any) => 
       (e.userId === user?.id || !e.userId) && new Date(e.date) >= oneWeekAgo
     );
-    const userSleep = sleepLogs.filter((l: any) => 
-      (l.userId === user?.id || !l.userId) && new Date(l.date) >= oneWeekAgo
-    );
 
     const weeklyData = weekDays.map((day, index) => {
       const dayDate = new Date();
@@ -356,19 +330,16 @@ function ProgressPage() {
       const dayMoodEntries = userMoodEntries.filter((e: any) => e.date === dayString);
       const dayCBT = userCBT.filter((r: any) => r.date === dayString);
       const dayGratitude = userGratitude.filter((e: any) => e.date === dayString);
-      const daySleep = userSleep.filter((l: any) => l.date === dayString);
 
-      const totalSessions = dayMoodEntries.length + dayCBT.length + dayGratitude.length + daySleep.length;
+      const totalSessions = dayMoodEntries.length + dayCBT.length + dayGratitude.length;
       
       // Calculate average mood for the day
       const avgMood = dayMoodEntries.length > 0 
         ? dayMoodEntries.reduce((sum: number, entry: any) => sum + (entry.moodIntensity || 5), 0) / dayMoodEntries.length / 2
         : 0;
 
-      // Calculate average sleep for the day
-      const avgSleep = dayMoodEntries.length > 0 
-        ? dayMoodEntries.reduce((sum: number, entry: any) => sum + (entry.sleepHours || 7), 0) / dayMoodEntries.length
-        : 0;
+      // Set default sleep value since sleep tracking is removed
+      const avgSleep = 7.5;
 
       return { 
         name: day, 
@@ -389,13 +360,11 @@ function ProgressPage() {
     // Load all therapy activities
     const cbtRecords = JSON.parse(localStorage.getItem('mindcare_cbt_records') || '[]');
     const gratitudeEntries = JSON.parse(localStorage.getItem('mindcare_gratitude_entries') || '[]');
-    const sleepLogs = JSON.parse(localStorage.getItem('mindcare_sleep_logs') || '[]');
     const exposureSessions = JSON.parse(localStorage.getItem('mindcare_exposure_sessions') || '[]');
     const videoProgress = JSON.parse(localStorage.getItem('mindcare_video_progress') || '[]');
 
     const userCBT = cbtRecords.filter((r: any) => r.userId === user?.id || !r.userId);
     const userGratitude = gratitudeEntries.filter((e: any) => e.userId === user?.id || !e.userId);
-    const userSleep = sleepLogs.filter((l: any) => l.userId === user?.id || !l.userId);
     const userExposure = exposureSessions.filter((s: any) => s.userId === user?.id || !s.userId);
     const userVideo = videoProgress.filter((p: any) => p.userId === user?.id || !p.userId);
 
@@ -404,16 +373,18 @@ function ProgressPage() {
                                Math.floor(userGratitude.length * 0.5) + 
                                userExposure.length;
 
-    // Calculate sleep quality achievements
-    const goodSleepDays = userMoodEntries.filter((entry: any) => 
-      (entry.sleepHours || 7) >= 8 && (entry.sleepQuality === 'Good' || entry.sleepQuality === 'Average')
+    // Calculate stress management achievements
+    const stressLogs = JSON.parse(localStorage.getItem('mindcare_stress_logs') || '[]');
+    const userStressLogs = stressLogs.filter((l: any) => l.userId === user?.id || !l.userId);
+    const goodStressDays = userStressLogs.filter((log: any) => 
+      log.effectiveness >= 7 // High effectiveness in stress management
     ).length;
 
     // Calculate completed therapy modules
     const completedModules = [
       userCBT.length >= 3 ? 1 : 0,
       userGratitude.length >= 7 ? 1 : 0,
-      userSleep.length >= 3 ? 1 : 0,
+      userStressLogs.length >= 3 ? 1 : 0,
       mindfulnessSessions >= 5 ? 1 : 0,
       userVideo.length >= 2 ? 1 : 0
     ].reduce((sum, val) => sum + val, 0);
@@ -425,8 +396,8 @@ function ProgressPage() {
     achievements[1].earned = mindfulnessSessions >= 10;
     achievements[1].progress = Math.min(100, (mindfulnessSessions / 10) * 100);
 
-    achievements[2].earned = goodSleepDays >= 5;
-    achievements[2].progress = Math.min(100, (goodSleepDays / 5) * 100);
+    achievements[2].earned = goodStressDays >= 5;
+    achievements[2].progress = Math.min(100, (goodStressDays / 5) * 100);
 
     achievements[3].earned = completedModules >= 3;
     achievements[3].progress = Math.min(100, (completedModules / 3) * 100);

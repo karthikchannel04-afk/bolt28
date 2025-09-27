@@ -130,18 +130,6 @@ function TherapyModules() {
     },
     {
       id: 3,
-      moduleId: 'sleep',
-      title: 'Sleep Therapy',
-      description: 'Improve sleep quality with proven techniques and tracking',
-      icon: Moon,
-      color: 'from-indigo-500 to-purple-500',
-      duration: '20-25 min',
-      difficulty: 'Intermediate',
-      sessions: 10,
-      route: '/therapy-modules/sleep'
-    },
-    {
-      id: 4,
       moduleId: 'stress',
       title: 'Stress Management',
       description: 'Learn effective coping strategies for daily stress',
@@ -153,7 +141,7 @@ function TherapyModules() {
       route: '/therapy-modules/stress'
     },
     {
-      id: 5,
+      id: 4,
       moduleId: 'gratitude',
       title: 'Gratitude Journal',
       description: 'Daily gratitude practice with streak tracking',
@@ -165,19 +153,7 @@ function TherapyModules() {
       route: '/therapy-modules/gratitude'
     },
     {
-      id: 6,
-      moduleId: 'addiction',
-      title: 'Addiction Support',
-      description: 'Resources and strategies for overcoming addictive behaviors',
-      icon: Users,
-      color: 'from-red-500 to-pink-500',
-      duration: '25-30 min',
-      difficulty: 'Advanced',
-      sessions: 16,
-      route: '/therapy-modules/addiction'
-    },
-    {
-      id: 7,
+      id: 5,
       moduleId: 'music',
       title: 'Relaxation Music',
       description: 'Curated audio library for relaxation and focus',
@@ -189,7 +165,7 @@ function TherapyModules() {
       route: '/therapy-modules/music'
     },
     {
-      id: 8,
+      id: 6,
       moduleId: 'tetris',
       title: 'Tetris Therapy',
       description: 'Gamified stress relief and cognitive enhancement',
@@ -201,7 +177,7 @@ function TherapyModules() {
       route: '/therapy-modules/tetris'
     },
     {
-      id: 9,
+      id: 7,
       moduleId: 'art',
       title: 'Art & Color Therapy',
       description: 'Creative expression through digital art and coloring',
@@ -213,7 +189,7 @@ function TherapyModules() {
       route: '/therapy-modules/art'
     },
     {
-      id: 10,
+      id: 8,
       moduleId: 'exposure',
       title: 'Exposure Therapy',
       description: 'Gradual exposure techniques for anxiety and phobias',
@@ -225,7 +201,7 @@ function TherapyModules() {
       route: '/therapy-modules/exposure'
     },
     {
-      id: 11,
+      id: 9,
       moduleId: 'video',
       title: 'Video Therapy',
       description: 'Guided video sessions with therapeutic content',
@@ -237,7 +213,7 @@ function TherapyModules() {
       route: '/therapy-modules/video'
     },
     {
-      id: 12,
+      id: 10,
       moduleId: 'act',
       title: 'Acceptance & Commitment Therapy',
       description: 'ACT principles for psychological flexibility',
@@ -455,7 +431,7 @@ function TherapyModules() {
           </p>
           
           <div className="grid md:grid-cols-3 gap-3">
-            {therapyModules.slice(3, 6).map((module, index) => (
+            {therapyModules.slice(2, 5).map((module, index) => (
               <div
                 key={module.id}
                 className={`p-3 rounded-lg border-2 border-dashed ${
