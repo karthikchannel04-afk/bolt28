@@ -814,7 +814,7 @@ function ProgressPage() {
             <h3 className={`text-lg font-semibold mb-4 ${
               theme === 'dark' ? 'text-white' : 'text-gray-800'
             }`}>
-              Sleep Quality ({selectedTimeframe})
+              Stress & Energy Levels ({selectedTimeframe})
             </h3>
             {moodData.length > 0 ? (
               <ResponsiveContainer width="100%" height={250}>
@@ -829,7 +829,7 @@ function ProgressPage() {
                   <YAxis 
                     stroke={theme === 'dark' ? '#9CA3AF' : '#6B7280'}
                     fontSize={12}
-                    domain={[0, 12]}
+                    domain={[0, 10]}
                   />
                   <Tooltip 
                     contentStyle={{
@@ -841,29 +841,30 @@ function ProgressPage() {
                   />
                   <Area 
                     type="monotone" 
-                    dataKey="sleep" 
-                    stroke="#3B82F6" 
-                    fill="#3B82F6"
+                    dataKey="energy" 
+                    stroke="#10B981" 
+                    fill="#10B981"
                     fillOpacity={0.3}
                     strokeWidth={2}
+                    name="Energy Level"
                   />
                 </AreaChart>
               </ResponsiveContainer>
             ) : (
               <div className="h-64 flex items-center justify-center">
                 <div className="text-center">
-                  <Moon className={`w-12 h-12 mx-auto mb-4 ${
+                  <Target className={`w-12 h-12 mx-auto mb-4 ${
                     theme === 'dark' ? 'text-gray-600' : 'text-gray-400'
                   }`} />
                   <p className={`text-lg ${
                     theme === 'dark' ? 'text-gray-400' : 'text-gray-600'
                   }`}>
-                    No sleep data yet
+                    No energy data yet
                   </p>
                   <p className={`text-sm ${
                     theme === 'dark' ? 'text-gray-500' : 'text-gray-500'
                   }`}>
-                    Track your sleep in the mood tracker
+                    Track your energy in the mood tracker
                   </p>
                 </div>
               </div>

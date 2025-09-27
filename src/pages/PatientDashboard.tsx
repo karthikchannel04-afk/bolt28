@@ -450,7 +450,7 @@ function PatientDashboard() {
                       {activity.type === 'mood' && <Heart className="w-4 h-4 text-purple-600" />}
                       {activity.type === 'cbt' && <Brain className="w-4 h-4 text-blue-600" />}
                       {activity.type === 'gratitude' && <Heart className="w-4 h-4 text-green-600" />}
-                      {activity.type === 'sleep' && <Moon className="w-4 h-4 text-indigo-600" />}
+                      {activity.type === 'stress' && <Target className="w-4 h-4 text-orange-600" />}
                       {activity.type === 'session' && <Video className="w-4 h-4 text-teal-600" />}
                       {activity.type === 'welcome' && <Heart className="w-4 h-4 text-purple-600" />}
                     </div>
